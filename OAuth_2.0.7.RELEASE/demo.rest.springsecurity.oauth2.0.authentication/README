@@ -1,0 +1,47 @@
+﻿******************************
+Working REST Client Url's:-
+******************************
+
+The reference is being purly taken from the "http://www.e-zest.net/blog/rest-authentication-using-oauth-2-0-resource-owner-password-flow-protocol/#comment-5993"
+
+The code is developed using the following:
+1) Spring v 4.0.9.RELEASE
+2) Spring Security 3.2.5.RELEASE
+3) Maven 3.2.x
+4) Java JDK 1.7
+
+
+
+Request to get Token :
+*********************
+Make sure: use POST
+
+http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/oauth/token?username=user1&password=user1&client_id=client1&client_secret=client1&grant_type=password&scope=read,write,trust
+
+Request To access protected resource getMyInfo :
+**********************************************
+http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo?access_token=2fa6a67b-a817-42e8-b852-e4f23f09db62
+
+Request to access resource using refresh_token
+***********************************************
+http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo?grant_type=refresh_token&client_id=client1&client_secret=client1&refresh_token=848abf99-8d1d-4aae-b413-032627c837d7
+
+
+**************
+CURL URL's:
+**************
+Request to get Token :
+*********************
+curl -X POST http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/oauth/token -H “Accept: application/json” -d "username=user1&password=user1&client_id=client1&client_secret=client1&grant_type=password"
+
+
+Request To access protected resource getMyInfo :
+**********************************************
+curl -H "access_token=2fa6a67b-a817-42e8-b852-e4f23f09db62"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
+
+
+#curl -X POST http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo -H “Accept: application/json” -d "grant_type=refresh_token&client_id=client1&client_secret=client1&refresh_token=616a2804-517b-4603-baf6-c00bad41ac46"
+
+Request to access resource using refresh_token
+***********************************************
+curl -H "refresh_token=174bf555-4248-43f9-8367-ac7b51690670"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
