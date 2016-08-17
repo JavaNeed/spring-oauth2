@@ -13,35 +13,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientDetailsServiceImpl implements ClientDetailsService {
 
+	private static final String CLIENT_CREDENTIALS = "client_credentials";
+	private static final String REFRESH_TOKEN = "refresh_token";
+	private static final String PASSWORD = "password";
+
 	@Override
 	public ClientDetails loadClientByClientId(String clientId) throws OAuth2Exception {
+		List<String> authorizedGrantTypes=new ArrayList<>();
+		authorizedGrantTypes.add(PASSWORD);
+		authorizedGrantTypes.add(REFRESH_TOKEN);
+		authorizedGrantTypes.add(CLIENT_CREDENTIALS);
 
+		BaseClientDetails clientDetails = new BaseClientDetails();
 		if (clientId.equals("client1")) {
-			List<String> authorizedGrantTypes=new ArrayList<>();
-			authorizedGrantTypes.add("password");
-			authorizedGrantTypes.add("refresh_token");
-			authorizedGrantTypes.add("client_credentials");
-
-			BaseClientDetails clientDetails = new BaseClientDetails();
 			clientDetails.setClientId("client1");
 			clientDetails.setClientSecret("client1");
 			clientDetails.setAuthorizedGrantTypes(authorizedGrantTypes);
-
 			return clientDetails;
 
 		} else if(clientId.equals("client2")){
-
-			List<String> authorizedGrantTypes=new ArrayList<>();
-			authorizedGrantTypes.add("password");
-			authorizedGrantTypes.add("refresh_token");
-			authorizedGrantTypes.add("client_credentials");
-
-
-			BaseClientDetails clientDetails = new BaseClientDetails();
 			clientDetails.setClientId("client2");
 			clientDetails.setClientSecret("client2");
 			clientDetails.setAuthorizedGrantTypes(authorizedGrantTypes);
-
 			return clientDetails;
 		}
 		else{

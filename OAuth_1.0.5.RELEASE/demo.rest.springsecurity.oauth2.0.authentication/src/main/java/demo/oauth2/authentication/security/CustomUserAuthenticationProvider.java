@@ -12,29 +12,22 @@ import org.springframework.security.core.GrantedAuthority;
 public class CustomUserAuthenticationProvider implements AuthenticationProvider{
 
 	@Override
-	public Authentication authenticate(Authentication authentication)
-			throws AuthenticationException {
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		if(authentication.getPrincipal().equals("user")&& authentication.getCredentials().equals("user")){
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-			CustomUserPasswordAuthenticationToken auth = 
-					new CustomUserPasswordAuthenticationToken(authentication.getPrincipal(), 
-							authentication.getCredentials(),grantedAuthorities);
+		Object principal = authentication.getPrincipal();
+		Object credentials = authentication.getCredentials();
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+		
+		if(principal.equals("user") && principal.equals("user")){
+			CustomUserPasswordAuthenticationToken auth = new CustomUserPasswordAuthenticationToken(principal, credentials,grantedAuthorities);
 			return auth;
 		}
-		else if(authentication.getPrincipal().equals("admin")&& authentication.getCredentials().equals("admin")){
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-			CustomUserPasswordAuthenticationToken auth = 
-					new CustomUserPasswordAuthenticationToken(authentication.getPrincipal(), 
-							authentication.getCredentials(),grantedAuthorities);
-
+		else if(principal.equals("admin") && principal.equals("admin")){
+			CustomUserPasswordAuthenticationToken auth = new CustomUserPasswordAuthenticationToken(principal, credentials,grantedAuthorities);
 			return auth;
 		}
-		else if(authentication.getPrincipal().equals("user1")&& authentication.getCredentials().equals("user1")){
-			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-			CustomUserPasswordAuthenticationToken auth = 
-					new CustomUserPasswordAuthenticationToken(authentication.getPrincipal(), 
-							authentication.getCredentials(),grantedAuthorities);
+		else if(principal.equals("user1") && principal.equals("user1")){
+			CustomUserPasswordAuthenticationToken auth = new CustomUserPasswordAuthenticationToken(principal, credentials,grantedAuthorities);
 			return auth;
 		}
 		else{

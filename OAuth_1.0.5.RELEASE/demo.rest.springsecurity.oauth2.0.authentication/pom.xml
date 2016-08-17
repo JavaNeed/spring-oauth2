@@ -11,12 +11,12 @@
 
 	<properties>
 		<!-- General Properties -->
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Spring Security -->
-		<springsec.version>3.2.5.RELEASE</springsec.version>
+		<springsec.version>3.2.8.RELEASE</springsec.version>
 
 		<!-- Spring MVC -->
 		<spring.version>4.0.9.RELEASE</spring.version>
@@ -26,6 +26,9 @@
 
 		<!-- Spring Security OAuth2 -->
 		<spring-security-oauth2-version>1.0.5.RELEASE</spring-security-oauth2-version>
+		
+		<logback.version>1.1.7</logback.version>
+		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
 
 		<!-- Servlet, JSP, CGLIB, JSTL -->
 		<servlet.version>3.1.0</servlet.version>
@@ -157,6 +160,19 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- logging, slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${jcl-over-slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 
 		<!-- Cglib -->
