@@ -32,16 +32,24 @@ CURL URL's:
 **************
 Request to get Token :
 *********************
-curl -X POST http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/oauth/token -H “Accept: application/json” -d "username=user1&password=user1&client_id=client1&client_secret=client1&grant_type=password"
+curl -vvv -X POST "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/oauth/token?username=user1&password=user1&client_id=client1&client_secret=client1&grant_type=password&scope=read,write,trust"
+
+{
+	"access_token":"ed788e8c-e504-4307-b43e-558914f85bf3",
+	"token_type":"bearer",
+	"refresh_token":"3e7e7dca-0db3-4423-a49d-842783fd9632",
+	"expires_in":299999,
+	"scope":"read,write,trust"
+}
 
 
 Request To access protected resource getMyInfo :
 **********************************************
-curl -H "access_token=2fa6a67b-a817-42e8-b852-e4f23f09db62"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
+curl -H "access_token=ed788e8c-e504-4307-b43e-558914f85bf3"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
 
 
 #curl -X POST http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo -H “Accept: application/json” -d "grant_type=refresh_token&client_id=client1&client_secret=client1&refresh_token=616a2804-517b-4603-baf6-c00bad41ac46"
 
 Request to access resource using refresh_token
 ***********************************************
-curl -H "refresh_token=174bf555-4248-43f9-8367-ac7b51690670"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
+curl -H "refresh_token=3e7e7dca-0db3-4423-a49d-842783fd9632"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
