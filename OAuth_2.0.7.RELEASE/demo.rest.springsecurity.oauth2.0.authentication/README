@@ -53,3 +53,8 @@ curl -H "access_token=ed788e8c-e504-4307-b43e-558914f85bf3"  "http://localhost:8
 Request to access resource using refresh_token
 ***********************************************
 curl -H "refresh_token=3e7e7dca-0db3-4423-a49d-842783fd9632"  "http://localhost:8080/demo.rest.springsecurity.oauth2.0.authentication/resources/MyResource/getMyInfo"
+
+
+curl -H "refresh_token=efeb9fa3-5395-4d72-ba6b-d6c9b75da1a1" "http://localhost:8080/oauth2/test/ateam"
+
+

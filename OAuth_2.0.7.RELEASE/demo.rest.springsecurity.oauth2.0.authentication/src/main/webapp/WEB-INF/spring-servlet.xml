@@ -8,26 +8,31 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
 
 
-	<http pattern="/oauth/token" create-session="stateless"  authentication-manager-ref="authenticationManager"
+	<http pattern="/oauth/token" auto-config="true" use-expressions="true"  create-session="stateless"  authentication-manager-ref="authenticationManager"
 		xmlns="http://www.springframework.org/schema/security" > 
 		
-		<intercept-url pattern="/oauth/token" access="IS_AUTHENTICATED_FULLY" />
+		<!-- <intercept-url pattern="/oauth/token" access="IS_AUTHENTICATED_FULLY" /> -->
+		<intercept-url pattern="/oauth/token" access="permitAll" />
 		<anonymous enabled="false" />
 		<http-basic entry-point-ref="clientAuthenticationEntryPoint" />
 		<custom-filter ref="clientCredentialsTokenEndpointFilter" before="BASIC_AUTH_FILTER" /> 
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
+		<!-- Added this to fix error -->
+		<sec:csrf disabled="true" />
 	</http>
 
-	<http pattern="/resources/**" create-session="never" entry-point-ref="oauthAuthenticationEntryPoint"
+	<http pattern="/resources/**" auto-config="true" use-expressions="true" create-session="never" entry-point-ref="oauthAuthenticationEntryPoint"
 		xmlns="http://www.springframework.org/schema/security">
 		<anonymous enabled="false" />
 		<intercept-url pattern="/resources/**" method="GET" />
 		<!-- <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_FULLY" /> -->
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
+		<!-- Added this to fix error -->
+		<sec:csrf disabled="true" />
 	</http>
 	
-	<http pattern="/logout" create-session="never" 
+	<http pattern="/logout" create-session="never"  auto-config="true" use-expressions="true"
 		entry-point-ref="oauthAuthenticationEntryPoint"
 	 	xmlns="http://www.springframework.org/schema/security">
 		<anonymous enabled="false" />
@@ -35,6 +40,8 @@
 		<sec:logout invalidate-session="true" logout-url="/logout" success-handler-ref="logoutSuccessHandler"   />
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
+		<!-- Added this to fix error -->
+		<sec:csrf disabled="true" />
 	</http>
 	
 	<bean id="logoutSuccessHandler" class="demo.oauth2.authentication.security.LogoutImpl" >

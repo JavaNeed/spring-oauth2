@@ -30,6 +30,10 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider{
 			CustomUserPasswordAuthenticationToken auth = new CustomUserPasswordAuthenticationToken(principal, credentials,grantedAuthorities);
 			return auth;
 		}
+		else if(principal.equals("client1") && principal.equals("client1")){
+			CustomUserPasswordAuthenticationToken auth = new CustomUserPasswordAuthenticationToken(principal, credentials,grantedAuthorities);
+			return auth;
+		}
 		else{
 			throw new BadCredentialsException("Bad User Credentials.");
 		}

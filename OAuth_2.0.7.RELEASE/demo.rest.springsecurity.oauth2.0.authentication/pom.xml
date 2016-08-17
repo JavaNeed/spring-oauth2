@@ -16,17 +16,19 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Spring Security -->
-		<springsec.version>3.2.8.RELEASE</springsec.version>
+		<!-- <springsec.version>3.2.8.RELEASE</springsec.version> -->
+		<springsec.version>4.1.1.RELEASE</springsec.version>
 
 		<!-- Spring MVC -->
-		<spring.version>4.0.9.RELEASE</spring.version>
+		<!-- <spring.version>4.0.9.RELEASE</spring.version> -->
+		<spring.version>4.3.1.RELEASE</spring.version>
 
 		<!-- Jersey Server -->
 		<jersey-version>1.19</jersey-version>
 
 		<!-- Spring Security OAuth2 -->
 		<spring-security-oauth2-version>2.0.10.RELEASE</spring-security-oauth2-version>
-		
+
 		<logback.version>1.1.7</logback.version>
 		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
 
@@ -39,12 +41,6 @@
 
 
 	<dependencies>
-		<!-- Spring Security OAuth2 -->
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-			<version>${spring-security-oauth2-version}</version>
-		</dependency>
 
 		<!-- Spring Web MVC -->
 		<dependency>
@@ -73,6 +69,19 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${springsec.version}</version>
+		</dependency>
+
+		<!-- Spring Security OAuth2 -->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>${spring-security-oauth2-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- JSTL -->
@@ -162,7 +171,14 @@
 			<scope>test</scope>
 		</dependency>
 		
-		
+		<!-- Added -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+
+
 		<!-- logging, slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
